@@ -19,8 +19,8 @@ export class ScrapingController {
   //@UseFilters(new HttpExceptionFilter())
   async createScraping(@Body() scraping: ScrapingDTO, @Res() res: Response) {
     try {
-      let data = await this.scrapingService.createScraping(scraping);
-      res.status(HttpStatus.OK).json({ result: data });
+      const data = await this.scrapingService.createScraping(scraping);
+      res.status(HttpStatus.OK).json({ [scraping.tag]: data });
     } catch (err) {
       res.status(500).json({ message: err.message, statusCode: 500 });
     }
